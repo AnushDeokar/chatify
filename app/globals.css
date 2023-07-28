@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.sign-up-with::before, .sign-up-with::after{
+    content: "";
+    flex: 1 1;
+    border-bottom: 1px solid gray;
+    margin: auto;
+}
+
+.sign-up-with:before {
+    margin-right: 10px
+  }
+.sign-up-with:after {
+margin-left: 10px
+}
