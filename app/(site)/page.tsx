@@ -1,11 +1,12 @@
 'use client'
 import Image from 'next/image'
-import AuthForm from './components/AuthForm'
+import AuthForm from '@/components/AuthForm';
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react'
 import axios from 'axios'
 import { signIn } from "next-auth/react";
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
+import { toast } from 'react-hot-toast'
 
 interface details{
     username: string,
@@ -61,11 +62,11 @@ export default function Home() {
         })
         .then((callback)=>{
             if (callback?.error) {
-                console.log(callback.error);
-                console.log('Invalid credentials!');
+                toast.error("Invalid Credentials!")
               }
       
               if (callback?.ok) {
+                toast.success("Successfully Logged In!")
                 router.push('/chat')
               }
         })
@@ -129,9 +130,9 @@ export default function Home() {
             </button>
             </div>
         </div>
-        <h3 className='flex sign-up-with mt-5 text-gray-700'><span>Already have an account? <button onClick={()=>{setFormState("LOGIN")}}>Signin</button></span></h3> 
+        <h3 className='flex mt-5 text-gray-700 justify-center'><span>Already have an account? <button onClick={()=>{setFormState("LOGIN")}} className='text-sky-500'>Signin</button></span></h3> 
         <div>
-           <h3 className='flex sign-up-with mt-5 text-gray-700'><span>or sign up with</span></h3> 
+           <h3 className='flex sign-up-with mt-5 text-gray-700'><span>or sign in with</span></h3> 
             <AuthForm/>
         </div>
 
@@ -171,9 +172,9 @@ export default function Home() {
             </button>
             </div>
         </div>
-        <h3 className='flex sign-up-with mt-5 text-gray-700'><span>Don't have an account? <button onClick={()=>{setFormState("REGISTER")}}>Signup</button></span></h3> 
+        <h3 className='flex  mt-5 text-gray-700 justify-center'><span>Don't have an account? <button onClick={()=>{setFormState("REGISTER")}} className='text-sky-500'>Signup</button></span></h3> 
         <div>
-           <h3 className='flex sign-up-with mt-5 text-gray-700'><span>or sign up with</span></h3> 
+           <h3 className='flex sign-up-with mt-5 text-gray-700'><span>or sign in with</span></h3> 
             <AuthForm/>
         </div>
 

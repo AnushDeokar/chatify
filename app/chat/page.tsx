@@ -23,10 +23,14 @@ function page() {
 
 
     return (
+        <>
+        {status==="authenticated"&&
         <div>
             Chat page
             <button onClick={()=>signOut({ callbackUrl: '/' })}>Signout</button>
         </div>
+        }
+        </>
     )
 }
 
