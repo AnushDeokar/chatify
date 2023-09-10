@@ -34,7 +34,7 @@ export const authoptions:AuthOptions = {
                 }
 
 
-                const ispasswordcorrect = bcrypt.compare(credentials.password, user.password);
+                const ispasswordcorrect = await bcrypt.compare(credentials.password, user.password);
 
                 if (!ispasswordcorrect){
                     throw new Error("Incorrect Password");

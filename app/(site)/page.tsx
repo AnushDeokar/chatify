@@ -17,7 +17,7 @@ export default function Home() {
     const { data: session, status } = useSession();
     const router = useRouter();
   
-    const [formstate, setFormState] = useState('REGISTER');
+    const [formstate, setFormState] = useState('LOGIN');
     const [details, setDetails] = useState<details>({
         username:"",
         email:"",
@@ -61,11 +61,10 @@ export default function Home() {
                 redirect:false
         })
         .then((callback)=>{
+
             if (callback?.error) {
                 toast.error("Invalid Credentials!")
-              }
-      
-              if (callback?.ok) {
+              }else if (callback?.ok) {
                 toast.success("Successfully Logged In!")
                 router.push('/chat')
               }
