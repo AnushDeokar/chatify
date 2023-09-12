@@ -6,11 +6,12 @@ import { useRouter } from "next/navigation"
 function page() {
     const router = useRouter();
     const { data: session, status } = useSession();
-    useEffect(()=>{
-        if (status!=="loading" && status!=="authenticated"){
-            router.push("/");
-        }
-    }, [status])
+    // useEffect(()=>{
+    //     if (status!=="loading" && status!=="authenticated"){
+    //         router.push("/");
+    //     }
+    //     console.log(session);
+    // }, [status])
 
 
 
@@ -23,14 +24,10 @@ function page() {
 
 
     return (
-        <>
-        {status==="authenticated"&&
         <div>
             Chat page
             <button onClick={()=>signOut({ callbackUrl: '/' })}>Signout</button>
         </div>
-        }
-        </>
     )
 }
 
