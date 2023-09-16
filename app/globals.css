@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base{
+  :root{
+    --gray-custom: #FFA500;
+  }
+}
 
 .sign-up-with::before, .sign-up-with::after{
     content: "";

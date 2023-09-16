@@ -1,32 +1,22 @@
 'use client'
-import { useEffect } from "react"
 import { useSession, signOut } from "next-auth/react"
-import { useRouter } from "next/navigation"
+import {Spinner} from "@nextui-org/react";
+import DesktopSideBar from "@/components/DesktopSideBar";
+
 
 function page() {
-    const router = useRouter();
     const { data: session, status } = useSession();
-    // useEffect(()=>{
-    //     if (status!=="loading" && status!=="authenticated"){
-    //         router.push("/");
-    //     }
-    //     console.log(session);
-    // }, [status])
-
 
 
     if (status === "loading") {
-        // Session is still loading, do nothing or show a loading spinner
-        return <h1>Loading...</h1>;
+        return <Spinner size="lg"/>
     }
 
 
-
-
     return (
-        <div>
-            Chat page
-            <button onClick={()=>signOut({ callbackUrl: '/' })}>Signout</button>
+        <div className="h-screen flex">
+            <DesktopSideBar/>
+            {/* <button onClick={()=>signOut({ callbackUrl: '/' })}>Signout</button> */}
         </div>
     )
 }
