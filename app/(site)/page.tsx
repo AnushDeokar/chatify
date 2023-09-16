@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import AuthForm from '@/components/AuthForm';
+import AuthForm from '@/components/auth-form';
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react'
 import axios from 'axios'
 import { signIn } from "next-auth/react";
