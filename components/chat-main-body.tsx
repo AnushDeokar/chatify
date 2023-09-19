@@ -2,8 +2,8 @@ import React from 'react'
 
 function ChatMainBody() {
   return (
-    <div className='flex-grow'>
-        Chain Main
+    <div className='flex-grow' style={{flexGrow:"8"}}>
+
     </div>
   )
 }
