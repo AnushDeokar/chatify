@@ -21,3 +21,14 @@
 .sign-up-with:after {
 margin-left: 10px
 }
+
+.main_chat{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+
+}
+@media screen and (max-width:1024px) {
+  .main_chat{
+    grid-template-columns: 1fr;
+  }
+}
