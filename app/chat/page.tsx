@@ -13,7 +13,7 @@ function page() {
     }
 
     return (
-        <div className="h-screen flex">
+        <div className="h-screen flex overflow-x-hidden">
             <DesktopSideBar/>
             <div className="grow w-full h-screen chat main_chat">
                 <ChatUsersList/>
