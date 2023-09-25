@@ -12,12 +12,18 @@ datasource db {
 
 model User{
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
+  username String
   email String @unique
   image String
   password String
   accounts Account[]
   createdAt DateTime @default(now())
+
+  chatIds String[] @db.ObjectId
+  chats Chat[] @relation(fields: [chatIds], references: [id])
+
+  messageIds String[] @db.ObjectId
+  messages Message[]
 }
 
 model Account {
@@ -37,4 +43,30 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+}
+
+model Chat{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  
+  userIds String[] @db.ObjectId
+  users User[] @relation(fields: [userIds], references: [id])
+
+  messagesIds String[] @db.ObjectId
+  messages Message[]
+
+}
+
+model Message{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+
+  senderId String @db.ObjectId
+  sender User @relation(fields: [senderId], references: [id])
+
+  text String
+  image String
+
+  chatId String @db.ObjectId
+  chat Chat @relation(fields: [chatId], references: [id])
 }

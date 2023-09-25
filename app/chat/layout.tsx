@@ -1,18 +1,22 @@
 "use client"
 import DesktopSideBar from "@/components/desktop-sidebar"
 import ChatUsersList from "@/components/chat-users-list"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 export default function layout({children}:{children: React.ReactNode} ){
 
     useEffect(()=>{
         console.log("called");
     }, [])
+
+    const [sidebaroption, setSideBarOption] = useState<Number>(0);
+
+
     return(<>
         <div className="h-screen flex overflow-x-hidden">
-            <DesktopSideBar/>
+            <DesktopSideBar option={sidebaroption} handleOptionChange={(i:Number)=>setSideBarOption(i)}/>
             <div className="grow w-full h-screen chat main_chat">
-                <ChatUsersList/>
+                <ChatUsersList option={sidebaroption}/>
                 {children}
             </div>    
             {/* <button onClick={()=>signOut({ callbackUrl: '/' })}>Signout</button> */}
