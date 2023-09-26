@@ -3,7 +3,6 @@ import React, { useRef, useState, useCallback } from 'react'
 import {BsSearch} from 'react-icons/bs';
 import ChatUserItem from './chat-user-item';
 import axios from 'axios';
-import {Button} from "@nextui-org/react";
 import { User } from '@/interfaces/User';
 import {Spinner} from "@nextui-org/react";
 
@@ -47,24 +46,20 @@ function ChatUsersList({option, chatlist}:{option: Number, chatlist:any}) {
                 <BsSearch className="text-gray-800 mx-4 text-gray-600"/>
                 <input placeholder='Search Chatify' className='bg-inherit outline-none grow text-sm' type='text'  ref={inputElem} onChange={() => handleSearch(inputElem.current?.value || '')} />
             </div>
-            {!loading?
-              <>
-                 <Spinner label="Loading..." color="warning" />
-                What the heck
-                <Button color="danger">
-                  Danger
-                </Button> 
-              </>
+            {loading?
+              <div className='flex w-full justify-center mt-10'>
+                 <Spinner label="Loading..." color="primary" />
+              </div>
             :
             <div className='flex flex-col w-full'>
-              {users? users.map((user: User, ind: any)=>{
+              {users.length!==0? users.map((user: User, ind: any)=>{
                 return (
                   <ChatUserItem user={user} key={ind}/>
                 )
               })
               :
-              <div>
-                No user Found
+              <div className='mt-10 flex justify-center w-full'>
+                No user Found 😕 
               </div>
             }
             </div>
