@@ -1,27 +1,29 @@
 import prisma from "@/app/libs/prismadb"
 import { NextResponse } from "next/server";
-import { getSession } from 'next-auth/react';
+import { getServerSession } from "next-auth/next"
+import { authoptions } from "../auth/[...nextauth]/route"
 
-//TODO: NEXT Auth Middleware API
-export async function POST(request:Request) {
-    console.log(request);
-    const body = await request.json();
 
-    const query = body.searchQuery;
-    const users = await prisma.user.findMany({
-        where:{
-            username:{
-                contains: query
+export async function POST(request:Request, response: Response) {
+
+    const session = await getServerSession(authoptions)
+    if (session) {
+        const body = await request.json();
+        const query = body.searchQuery;
+
+        const users = await prisma.user.findMany({
+            where:{
+                name:{
+                    contains: query
+                }
             }
-        }
-    })
-    console.log(query, users);
-    // const session = await getSession({ request });
+        })
 
-    // if (!session) {
-    //   return  NextResponse.json({ error: 'Not authenticated' });
-    // }
-    // const userId = session.user.id; 
-  
+        return NextResponse.json({users:users, success: true});
+
+    }else{
+        return NextResponse.json({msg:"You are not authenticated", success: false});
+    }
+    
     return NextResponse.json({msg:"hello"});
 }

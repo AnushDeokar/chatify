@@ -47,6 +47,19 @@ export const authoptions:AuthOptions = {
     debug: process.env.NODE_ENV === 'development',
     session: {
       strategy: "jwt",
+    },callbacks:{
+        session: async ({ session, token }) => {
+            if (session?.user) {
+              session.user.id = token.id;
+            }
+            return session;
+          },
+        async jwt({token,user}){
+            if(user){
+                token.id = user.id
+            }
+            return token
+        },
     },
     secret: process.env.NEXTAUTH_SECRET,
 
