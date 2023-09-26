@@ -4,12 +4,15 @@ import {BsSearch} from 'react-icons/bs';
 import ChatUserItem from './chat-user-item';
 import axios from 'axios';
 import {Button} from "@nextui-org/react";
+import { User } from '@/interfaces/User';
+import {Spinner} from "@nextui-org/react";
 
-
-function ChatUsersList({option}:{option: Number}) {
+function ChatUsersList({option, chatlist}:{option: Number, chatlist:any}) {
 
   const inputElem = useRef<HTMLInputElement | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [users, setUsers] = useState<any>(chatlist);
+
   const debounce = <T extends (...args: any[]) => void>(func: T, wait: number) => {
     let timeout: NodeJS.Timeout;
       
@@ -25,7 +28,10 @@ function ChatUsersList({option}:{option: Number}) {
       if (inputVal !== '') {
         setLoading(true);
         const res = await axios.post('/api/users', {searchQuery: inputVal})
+        setUsers(res.data.users);
         setLoading(false);
+      }else{
+        setUsers(chatlist);
       }
     } catch (e) {
       console.error(e);
@@ -41,18 +47,28 @@ function ChatUsersList({option}:{option: Number}) {
                 <BsSearch className="text-gray-800 mx-4 text-gray-600"/>
                 <input placeholder='Search Chatify' className='bg-inherit outline-none grow text-sm' type='text'  ref={inputElem} onChange={() => handleSearch(inputElem.current?.value || '')} />
             </div>
-            {loading?
-                <Button color="primary" isLoading>
-                  Loading
-                </Button>
+            {!loading?
+              <>
+                 <Spinner label="Loading..." color="warning" />
+                What the heck
+                <Button color="danger">
+                  Danger
+                </Button> 
+              </>
             :
             <div className='flex flex-col w-full'>
-                <ChatUserItem/>
-                <ChatUserItem/>
-                <ChatUserItem/>
-                <ChatUserItem/>
-                <ChatUserItem/>
-            </div>}
+              {users? users.map((user: User, ind: any)=>{
+                return (
+                  <ChatUserItem user={user} key={ind}/>
+                )
+              })
+              :
+              <div>
+                No user Found
+              </div>
+            }
+            </div>
+            }
 
     </div>
   )
