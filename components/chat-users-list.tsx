@@ -9,9 +9,11 @@ import { Spinner } from "@nextui-org/react";
 function ChatUsersList({
   option,
   chatlist,
+  handleClick,
 }: {
   option: Number;
   chatlist: any;
+  handleClick: (arg: User) => void;
 }) {
   const inputElem = useRef<HTMLInputElement | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -34,6 +36,7 @@ function ChatUsersList({
       if (inputVal !== "") {
         setLoading(true);
         const res = await axios.post("/api/users", { searchQuery: inputVal });
+        console.log(res.data.users);
         setUsers(res.data.users);
         setLoading(false);
       } else {
@@ -73,7 +76,13 @@ function ChatUsersList({
         <div className="flex flex-col w-full">
           {users.length !== 0 ? (
             users.map((user: User, ind: any) => {
-              return <ChatUserItem user={user} key={ind} />;
+              return (
+                <ChatUserItem
+                  user={user}
+                  key={ind}
+                  handleClick={(clickedUser: User) => handleClick(clickedUser)}
+                />
+              );
             })
           ) : (
             <div className="mt-10 flex justify-center w-full">

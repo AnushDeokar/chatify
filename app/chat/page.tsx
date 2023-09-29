@@ -1,14 +1,13 @@
 "use client";
 import React from "react";
 import { useSession, signOut } from "next-auth/react";
-import DesktopSideBar from "@/components/desktop-sidebar";
-import ChatUsersList from "@/components/chat-users-list";
 import { useEffect, useState } from "react";
 import { User } from "@/interfaces/User";
+import { useRouter } from "next/navigation";
 
 function page() {
   const { data: session, status } = useSession();
-
+  const router = useRouter();
   useEffect(() => {
     console.log("called");
   }, []);
@@ -17,37 +16,39 @@ function page() {
   const [sidebaroption, setSideBarOption] = useState<Number>(0);
   const chatlist = [
     {
+      id: "1",
       name: "User123",
       img: "",
     },
     {
+      id: "2",
       name: "User128",
       img: "",
     },
     {
+      id: "3",
       name: "User129",
       img: "",
     },
   ];
 
+  const handleClick: (arg: User) => void = (clickedUser) => {
+    console.log(clickedUser);
+    if (clickedUser.id !== chatUser?.id) {
+      setChatUser(clickedUser);
+      router.push(`/chat/${clickedUser.id}`);
+    }
+  };
+
   return (
-    <>
-      <DesktopSideBar
-        option={sidebaroption}
-        handleOptionChange={(i: Number) => setSideBarOption(i)}
-      />
-      <div className="grow w-full h-screen chat main_chat">
-        <ChatUsersList option={sidebaroption} chatlist={chatlist} />
-        <div
-          className="w-full hidden lg:block border flex flex-col none lg:border h-full"
-          style={{ display: "flex", flexDirection: "column" }}
-        >
-          <h1 className="m-auto text-2xl">
-            Start a new chat or reply to an existing chat🚀
-          </h1>
-        </div>
-      </div>
-    </>
+    <div
+      className="w-full hidden lg:block border flex flex-col none lg:border h-full"
+      style={{ display: "flex", flexDirection: "column" }}
+    >
+      <h1 className="m-auto text-2xl">
+        Start a new chat or reply to an existing chat🚀
+      </h1>
+    </div>
   );
 }
 

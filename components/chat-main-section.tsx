@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import ChatMainHeader from "./chat-main-header";
 import ChatMainInput from "./chat-main-input";
 import ChatMainBody from "./chat-main-body";
 import { useState } from "react";
+import { User } from "@/interfaces/User";
 
 interface Chat {
   text: string;
@@ -11,7 +12,7 @@ interface Chat {
   isMine: boolean;
 }
 
-function ChatMainSection() {
+function ChatMainSection({ chatId }: { chatId: string | string[] }) {
   const [chats, setChats] = useState<Chat[]>([
     {
       text: "Hi",
@@ -19,6 +20,10 @@ function ChatMainSection() {
       isMine: false,
     },
   ]);
+
+  useEffect(() => {
+    //TODO: Fetch the past conversation
+  }, [chatId]);
 
   const handleChatAddition: (chat: Chat) => void = (chat) => {
     console.log(chats);
