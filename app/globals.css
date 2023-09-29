@@ -2,33 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
-  :root{
-    --gray-custom: #FFA500;
+@layer base {
+  :root {
+    --gray-custom: #ffa500;
   }
 }
 
-.sign-up-with::before, .sign-up-with::after{
-    content: "";
-    flex: 1 1;
-    border-bottom: 1px solid gray;
-    margin: auto;
+.sign-up-with::before,
+.sign-up-with::after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 1px solid gray;
+  margin: auto;
 }
 
 .sign-up-with:before {
-    margin-right: 10px
-  }
+  margin-right: 10px;
+}
 .sign-up-with:after {
-margin-left: 10px
+  margin-left: 10px;
 }
 
-.main_chat{
+.main_chat {
   display: grid;
   grid-template-columns: 1fr 3fr;
-
 }
-@media screen and (max-width:1024px) {
-  .main_chat{
+@media screen and (max-width: 1024px) {
+  .main_chat {
     grid-template-columns: 1fr;
   }
 }

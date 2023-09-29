@@ -1,36 +1,42 @@
-'use client'
-import ChatMainHeader from "./chat-main-header"
-import ChatMainInput from "./chat-main-input"
-import ChatMainBody from "./chat-main-body"
-import { useState } from "react"
+"use client";
+import React from "react";
+import ChatMainHeader from "./chat-main-header";
+import ChatMainInput from "./chat-main-input";
+import ChatMainBody from "./chat-main-body";
+import { useState } from "react";
 
-interface Chat{
-  text: string, 
-  img: string, 
-  isMine: boolean
+interface Chat {
+  text: string;
+  img: string;
+  isMine: boolean;
 }
 
 function ChatMainSection() {
-  const [chats, setChats] = useState<Chat[]>([{
-    text: 'Hi',
-    img:'',
-    isMine: false
-  }]);
+  const [chats, setChats] = useState<Chat[]>([
+    {
+      text: "Hi",
+      img: "",
+      isMine: false,
+    },
+  ]);
 
-  const handleChatAddition:(chat:Chat)=>void = (chat)=>{
+  const handleChatAddition: (chat: Chat) => void = (chat) => {
     console.log(chats);
-    if (chat){
+    if (chat) {
       let updatedChats = [...chats, chat];
       setChats(updatedChats);
     }
-  }
+  };
   return (
-    <div className="w-full hidden lg:block border flex flex-col none lg:border" style={{display:"flex", flexDirection:"column"}}>
-        <ChatMainHeader/>
-        <ChatMainBody chats={chats}/>
-        <ChatMainInput handleChatAddition={handleChatAddition}/>
+    <div
+      className="w-full hidden lg:block border flex flex-col none lg:border"
+      style={{ display: "flex", flexDirection: "column" }}
+    >
+      <ChatMainHeader />
+      <ChatMainBody chats={chats} />
+      <ChatMainInput handleChatAddition={handleChatAddition} />
     </div>
-  )
+  );
 }
 
-export default ChatMainSection
+export default ChatMainSection;

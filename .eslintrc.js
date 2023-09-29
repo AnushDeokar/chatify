@@ -1,35 +1,22 @@
-/** @type {import("eslint").Linter.Config} */
-const config = {
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  extends: ["plugin:react/recommended", "prettier"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    project: true,
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 12,
+    sourceType: "module",
   },
-  plugins: ["@typescript-eslint", "tailwindcss"],
-  extends: [
-    "next/core-web-vitals",
-    "plugin:@typescript-eslint/recommended-type-checked",
-    "prettier",
-    "plugin:tailwindcss/recommended",
-  ],
-  rules: {
-    "@typescript-eslint/consistent-type-imports": [
-      "warn",
-      {
-        prefer: "type-imports",
-        fixStyle: "inline-type-imports",
-      },
-    ],
-    "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
-  },
+  plugins: ["react", "@typescript-eslint"],
+  rules: {},
   settings: {
-    tailwindcss: {
-      callees: ["cn"],
-      config: "./tailwind.config.ts",
-    },
-    next: {
-      rootDir: ["./"],
+    react: {
+      version: "detect",
     },
   },
-}
-
-module.exports = config
+};

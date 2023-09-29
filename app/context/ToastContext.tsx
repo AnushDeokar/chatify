@@ -1,10 +1,9 @@
-'use client'
-import { Toaster } from "react-hot-toast"
+"use client";
+import React from "react";
+import { Toaster } from "react-hot-toast";
 
 function ToastContext() {
-  return (
-    <Toaster/>
-  )
+  return <Toaster />;
 }
 
 export default ToastContext;
