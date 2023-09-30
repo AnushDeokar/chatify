@@ -3,19 +3,20 @@ import React from "react";
 import { MdInsertPhoto } from "react-icons/md";
 import { BsFillEmojiSmileFill, BsFillSendFill } from "react-icons/bs";
 import { useState } from "react";
-
-interface Chat {
-  text: string;
-  img: string;
-  isMine: boolean;
-}
+import { useSession } from "next-auth/react";
+import { Chat } from "@/interfaces/Chat";
 
 function ChatMainInput({
   handleChatAddition,
 }: {
   handleChatAddition: (chat: Chat) => void;
 }) {
-  const [chat, setChat] = useState<Chat>({ text: "", img: "", isMine: true });
+  const { data: session, status } = useSession();
+  const [chat, setChat] = useState<Chat>({
+    image: "",
+    text: "",
+    senderId: session?.user.id ?? "",
+  });
   return (
     <div className="w-full flex items-center px-4 gap-4 pb-2">
       <MdInsertPhoto size={24} style={{ color: "#0084ff" }} />
@@ -36,6 +37,7 @@ function ChatMainInput({
         style={{ color: "#0084ff" }}
         onClick={() => {
           handleChatAddition(chat);
+          setChat({ image: "", text: "", senderId: session?.user.id ?? "" });
         }}
       />
     </div>

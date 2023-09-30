@@ -8,9 +8,6 @@ import { useRouter } from "next/navigation";
 function page() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  useEffect(() => {
-    console.log("called");
-  }, []);
 
   const [chatUser, setChatUser] = useState<User | null>(null);
   const [sidebaroption, setSideBarOption] = useState<Number>(0);
@@ -33,7 +30,6 @@ function page() {
   ];
 
   const handleClick: (arg: User) => void = (clickedUser) => {
-    console.log(clickedUser);
     if (clickedUser.id !== chatUser?.id) {
       setChatUser(clickedUser);
       router.push(`/chat/${clickedUser.id}`);

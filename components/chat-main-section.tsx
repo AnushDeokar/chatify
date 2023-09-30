@@ -5,30 +5,39 @@ import ChatMainInput from "./chat-main-input";
 import ChatMainBody from "./chat-main-body";
 import { useState } from "react";
 import { User } from "@/interfaces/User";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import { Chat } from "@/interfaces/Chat";
 
-interface Chat {
-  text: string;
-  img: string;
-  isMine: boolean;
-}
-
-function ChatMainSection({ chatId }: { chatId: string | string[] }) {
+function ChatMainSection({ userchatId }: { userchatId: string | string[] }) {
   const [chats, setChats] = useState<Chat[]>([
     {
       text: "Hi",
-      img: "",
-      isMine: false,
+      image: "",
+      senderId: "klsjdfkld",
     },
   ]);
 
+  const [chatId, setChatId] = useState<string | null>(null);
+
   useEffect(() => {
     //TODO: Fetch the past conversation
-  }, [chatId]);
+    const fetchChat = async () => {
+      const res = await axios.post("/api/chat", { userchatId: userchatId });
+      if (res.data.success) {
+        setChatId(res.data.chatId);
+      }
+    };
+    fetchChat();
+  }, [userchatId]);
 
-  const handleChatAddition: (chat: Chat) => void = (chat) => {
-    console.log(chats);
+  const handleChatAddition: (chat: Chat) => void = async (chat) => {
     if (chat) {
       let updatedChats = [...chats, chat];
+      const res = await axios.post("/api/chat/insert", {
+        message: chat,
+        chatId: chatId,
+      });
       setChats(updatedChats);
     }
   };

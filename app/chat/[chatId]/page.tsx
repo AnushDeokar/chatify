@@ -12,7 +12,7 @@ function page() {
     return <Spinner size="lg" />;
   }
 
-  return <ChatMainSection chatId={chatId} />;
+  return <ChatMainSection userchatId={chatId} />;
 }
 
 export default page;

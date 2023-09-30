@@ -10,9 +10,6 @@ import { useRouter } from "next/navigation";
 export default function layout({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
   const router = useRouter();
-  useEffect(() => {
-    console.log("called");
-  }, []);
 
   const [chatUser, setChatUser] = useState<User | null>(null);
   const [sidebaroption, setSideBarOption] = useState<Number>(0);
