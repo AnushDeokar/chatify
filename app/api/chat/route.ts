@@ -4,6 +4,40 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authoptions } from "../auth/[...nextauth]/route";
 
+export async function GET(request: Request) {
+  const session = await getServerSession(authoptions);
+  if (session) {
+    const recentchats = await prisma.chat.findMany({
+      where: {
+        userIds: {
+          has: session.user.id,
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      include: {
+        users: {
+          select: {
+            id: true,
+            name: true,
+            image: true,
+          },
+        },
+        messages: {
+          orderBy: {
+            createdAt: "desc",
+          },
+          take: 1, // Fetch only the last message
+        },
+      },
+    });
+
+    return NextResponse.json({ success: true, chatlist: recentchats });
+  }
+
+  return NextResponse.json({ success: false });
+}
 export async function POST(request: Request) {
   const session = await getServerSession(authoptions);
   const body = await request.json();

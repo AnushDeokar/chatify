@@ -6,6 +6,8 @@ import ChatUsersList from "@/components/chat-users-list";
 import { useEffect, useState } from "react";
 import { User } from "@/interfaces/User";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import { Spinner } from "@nextui-org/react";
 
 export default function layout({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
@@ -13,23 +15,8 @@ export default function layout({ children }: { children: React.ReactNode }) {
 
   const [chatUser, setChatUser] = useState<User | null>(null);
   const [sidebaroption, setSideBarOption] = useState<Number>(0);
-  const chatlist = [
-    {
-      id: "1",
-      name: "User123",
-      img: "",
-    },
-    {
-      id: "2",
-      name: "User128",
-      img: "",
-    },
-    {
-      id: "3",
-      name: "User129",
-      img: "",
-    },
-  ];
+  const [chatlist, setChatList] = useState<User[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const handleClick: (arg: User) => void = (clickedUser) => {
     console.log(clickedUser);
@@ -39,6 +26,45 @@ export default function layout({ children }: { children: React.ReactNode }) {
     }
   };
 
+  useEffect(() => {
+    const fetchLatestChats = async () => {
+      console.log("called");
+      const res = await axios.get("/api/chat");
+      if (res.data.success) {
+        // Create sets to collect unique userIds and users
+        const uniqueUsers: any[] = [];
+        const recentChats = res.data.chatlist;
+        console.log("recent chats", recentChats);
+        // Loop through the response and add userIds and users to sets
+        recentChats.forEach((conversation: any) => {
+          conversation.users.forEach((user: any) => {
+            const existingUser = uniqueUsers.find((u) => u.name === user.name);
+            if (!existingUser) {
+              uniqueUsers.push(user);
+            }
+          });
+        });
+
+        // Convert sets back to arrays
+        const uniqueUsersArray = uniqueUsers;
+
+        console.log("Unique Users:", uniqueUsersArray);
+        setChatList(uniqueUsers);
+        setLoading(false);
+      }
+    };
+    fetchLatestChats();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="w-screen h-screen flex justify-center">
+        <div className="m-auto">
+          <Spinner size="lg" label="Fetching Chats..." />
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="h-screen flex overflow-x-hidden">
       <DesktopSideBar
