@@ -25,18 +25,30 @@ export async function POST(request: Request) {
         ],
       },
     });
-    console.log(existingConversations);
+
     if (existingConversations.length === 0) {
       const newConversation = await prisma.chat.create({
         data: {
           userIds: [userchatId, session.user.id],
         },
       });
-      return NextResponse.json({ success: true, chatId: newConversation.id });
+
+      return NextResponse.json({
+        success: true,
+        chatId: newConversation.id,
+        chats: [],
+      });
     } else {
+      const chats = await prisma.message.findMany({
+        where: {
+          chatId: existingConversations[0].id,
+        },
+      });
+
       return NextResponse.json({
         success: true,
         chatId: existingConversations[0].id,
+        chats: chats,
       });
     }
   }

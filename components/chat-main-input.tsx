@@ -36,8 +36,10 @@ function ChatMainInput({
         size={24}
         style={{ color: "#0084ff" }}
         onClick={() => {
-          handleChatAddition(chat);
-          setChat({ image: "", text: "", senderId: session?.user.id ?? "" });
+          if (chat.text !== "" || chat.image !== "") {
+            handleChatAddition(chat);
+            setChat({ image: "", text: "", senderId: session?.user.id ?? "" });
+          }
         }}
       />
     </div>

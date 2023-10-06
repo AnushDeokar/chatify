@@ -21,11 +21,11 @@ function ChatMainSection({ userchatId }: { userchatId: string | string[] }) {
   const [chatId, setChatId] = useState<string | null>(null);
 
   useEffect(() => {
-    //TODO: Fetch the past conversation
     const fetchChat = async () => {
       const res = await axios.post("/api/chat", { userchatId: userchatId });
       if (res.data.success) {
         setChatId(res.data.chatId);
+        setChats(res.data.chats);
       }
     };
     fetchChat();
