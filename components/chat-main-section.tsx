@@ -10,13 +10,7 @@ import { useSession } from "next-auth/react";
 import { Chat } from "@/interfaces/Chat";
 
 function ChatMainSection({ userchatId }: { userchatId: string | string[] }) {
-  const [chats, setChats] = useState<Chat[]>([
-    {
-      text: "Hi",
-      image: "",
-      senderId: "klsjdfkld",
-    },
-  ]);
+  const [chats, setChats] = useState<Chat[]>([]);
 
   const [chatId, setChatId] = useState<string | null>(null);
 
@@ -34,7 +28,7 @@ function ChatMainSection({ userchatId }: { userchatId: string | string[] }) {
   const handleChatAddition: (chat: Chat) => void = async (chat) => {
     if (chat) {
       let updatedChats = [...chats, chat];
-      const res = await axios.post("/api/chat/insert", {
+      const res = await axios.post("/api/message", {
         message: chat,
         chatId: chatId,
       });
@@ -46,7 +40,7 @@ function ChatMainSection({ userchatId }: { userchatId: string | string[] }) {
       className="w-full hidden lg:block border flex flex-col none lg:border"
       style={{ display: "flex", flexDirection: "column" }}
     >
-      <ChatMainHeader />
+      <ChatMainHeader userchatId={userchatId} />
       <ChatMainBody chats={chats} />
       <ChatMainInput handleChatAddition={handleChatAddition} />
     </div>

@@ -28,13 +28,12 @@ export default function layout({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const fetchLatestChats = async () => {
-      console.log("called");
       const res = await axios.get("/api/chat");
       if (res.data.success) {
         // Create sets to collect unique userIds and users
         const uniqueUsers: any[] = [];
         const recentChats = res.data.chatlist;
-        console.log("recent chats", recentChats);
+
         // Loop through the response and add userIds and users to sets
         recentChats.forEach((conversation: any) => {
           conversation.users.forEach((user: any) => {

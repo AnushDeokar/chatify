@@ -11,7 +11,7 @@ function ChatUserItem({
   handleClick: (arg: User) => void;
 }) {
   const randomNumb = Math.floor(Math.random() * 100);
-  const url = `https://avatars.dicebear.com/api/bottts/${randomNumb}.svg`;
+  const url = `https://api.multiavatar.com/${randomNumb}.svg`;
 
   return (
     <div

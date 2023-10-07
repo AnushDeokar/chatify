@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Avatar } from "@nextui-org/react";
 
-function ChatMainHeader() {
+function ChatMainHeader({ userchatId }: { userchatId: string | string[] }) {
   return (
     <div className="w-full h-14 px-2 py-2 flex items-center gap-4 border">
       <Avatar
