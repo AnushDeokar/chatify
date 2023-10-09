@@ -6,8 +6,8 @@ import ChatMainBody from "./chat-main-body";
 import { useState } from "react";
 import { User } from "@/interfaces/User";
 import axios from "axios";
-import { useSession } from "next-auth/react";
 import { Chat } from "@/interfaces/Chat";
+import { pusherClient } from "@/app/libs/pusher";
 
 function ChatMainSection({ userchatId }: { userchatId: string | string[] }) {
   const [chats, setChats] = useState<Chat[]>([]);
@@ -24,6 +24,22 @@ function ChatMainSection({ userchatId }: { userchatId: string | string[] }) {
     };
     fetchChat();
   }, [userchatId]);
+
+  useEffect(() => {
+    if (chatId) {
+      pusherClient.subscribe(chatId);
+    }
+    pusherClient.bind("messages:new", () => {
+      console.log("msg received");
+    });
+
+    return () => {
+      if (chatId) {
+        pusherClient.unsubscribe(chatId);
+      }
+      pusherClient.unbind("messages:new");
+    };
+  }, [chatId]);
 
   const handleChatAddition: (chat: Chat) => void = async (chat) => {
     if (chat) {
