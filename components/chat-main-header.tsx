@@ -1,14 +1,20 @@
-import React, { useEffect } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Avatar } from "@nextui-org/react";
+import axios from "axios";
 
 function ChatMainHeader({ userchatId }: { userchatId: string | string[] }) {
+  const [user, setUser] = useState<any>(null);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const res = await axios.post("/api/users/find", { id: userchatId });
+      setUser(res.data.user);
+    };
+    fetchUserData();
+  }, []);
   return (
     <div className="w-full h-14 px-2 py-2 flex items-center gap-4 border">
-      <Avatar
-        src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-        className="w-10 h-10"
-      />
-      <h1 className="font-semibold">Friend Name</h1>
+      <Avatar src={user?.image} className="w-10 h-10" />
+      <h1 className="font-semibold">{user?.name}</h1>
     </div>
   );
 }

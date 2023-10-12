@@ -5,6 +5,7 @@ import ChatUserItem from "./chat-user-item";
 import axios from "axios";
 import { User } from "@/interfaces/User";
 import { Spinner } from "@nextui-org/react";
+import { useSession } from "next-auth/react";
 
 function ChatUsersList({
   option,
@@ -18,6 +19,7 @@ function ChatUsersList({
   const inputElem = useRef<HTMLInputElement | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [users, setUsers] = useState<any>(chatlist);
+  const { data: session, status } = useSession();
 
   const debounce = <T extends (...args: any[]) => void>(
     func: T,
@@ -36,8 +38,12 @@ function ChatUsersList({
       if (inputVal !== "") {
         setLoading(true);
         const res = await axios.post("/api/users", { searchQuery: inputVal });
-        console.log(res.data.users);
-        setUsers(res.data.users);
+        const filteredusers = res.data.users.filter((user: any, id: any) => {
+          if (session?.user.id !== user.id) {
+            return user;
+          }
+        });
+        setUsers(filteredusers);
         setLoading(false);
       } else {
         setUsers(chatlist);

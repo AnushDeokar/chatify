@@ -16,9 +16,11 @@ function ChatMainSection({ userchatId }: { userchatId: string | string[] }) {
 
   useEffect(() => {
     const fetchChat = async () => {
+      //TODO: Fetch the corect chat
       const res = await axios.post("/api/chat", { userchatId: userchatId });
       if (res.data.success) {
         setChatId(res.data.chatId);
+        console.log("chats fetched", res.data.chats);
         setChats(res.data.chats);
       }
     };

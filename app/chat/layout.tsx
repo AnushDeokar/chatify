@@ -8,6 +8,7 @@ import { User } from "@/interfaces/User";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Spinner } from "@nextui-org/react";
+import ChatMainSection from "@/components/chat-main-section";
 
 export default function layout({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
@@ -48,7 +49,12 @@ export default function layout({ children }: { children: React.ReactNode }) {
         const uniqueUsersArray = uniqueUsers;
 
         console.log("Unique Users:", uniqueUsersArray);
-        setChatList(uniqueUsers);
+        const finalusers = uniqueUsers.filter((user, id) => {
+          if (session?.user.id !== user.id) {
+            return user;
+          }
+        });
+        setChatList(finalusers);
         setLoading(false);
       }
     };
@@ -76,6 +82,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
           chatlist={chatlist}
           handleClick={handleClick}
         />
+        {/* <ChatMainSection/> */}
         {children}
       </div>
     </div>
