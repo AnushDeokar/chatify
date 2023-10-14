@@ -43,7 +43,6 @@ export async function POST(request: Request) {
   const body = await request.json();
   const { userchatId } = body;
   if (session) {
-    console.log(userchatId, session.user.id);
     const existingConversations = await prisma.chat.findMany({
       where: {
         OR: [
@@ -60,7 +59,6 @@ export async function POST(request: Request) {
         ],
       },
     });
-    console.log("existing", existingConversations);
 
     if (existingConversations.length === 0) {
       const newConversation = await prisma.chat.create({

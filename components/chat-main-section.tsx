@@ -31,8 +31,8 @@ function ChatMainSection({ userchatId }: { userchatId: string | string[] }) {
     if (chatId) {
       pusherClient.subscribe(chatId);
     }
-    pusherClient.bind("messages:new", () => {
-      console.log("msg received");
+    pusherClient.bind("messages:new", (messageReceived: any) => {
+      setChats([...chats, messageReceived]);
     });
 
     return () => {
