@@ -8,7 +8,6 @@ import { signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import { Spinner } from "@nextui-org/react";
 
 interface details {
   username: string;
@@ -73,9 +72,6 @@ export default function Home() {
       })
       .catch(() => console.log("Something went wrong!"));
   };
-  if (status === "loading") {
-    return <Spinner size="lg" />;
-  }
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();

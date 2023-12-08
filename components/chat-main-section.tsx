@@ -55,7 +55,7 @@ function ChatMainSection({ userchatId }: { userchatId: string | string[] }) {
   };
   return (
     <div
-      className="w-full hidden lg:block border flex flex-col none lg:border"
+      className="w-full border flex flex-col none"
       style={{ display: "flex", flexDirection: "column" }}
     >
       <ChatMainHeader userchatId={userchatId} />

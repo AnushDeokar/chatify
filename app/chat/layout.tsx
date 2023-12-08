@@ -46,9 +46,6 @@ export default function layout({ children }: { children: React.ReactNode }) {
         });
 
         // Convert sets back to arrays
-        const uniqueUsersArray = uniqueUsers;
-
-        console.log("Unique Users:", uniqueUsersArray);
         const finalusers = uniqueUsers.filter((user, id) => {
           if (session?.user.id !== user.id) {
             return user;
@@ -77,11 +74,16 @@ export default function layout({ children }: { children: React.ReactNode }) {
         handleOptionChange={(i: Number) => setSideBarOption(i)}
       />
       <div className="grow w-full h-screen chat main_chat">
-        <ChatUsersList
-          option={sidebaroption}
-          chatlist={chatlist}
-          handleClick={handleClick}
-        />
+        <div
+          className={`pt-6 px-4 grow-4 h-screen overflow-y-auto hidden lg:block`}
+          style={{ flexGrow: "4" }}
+        >
+          <ChatUsersList
+            option={sidebaroption}
+            chatlist={chatlist}
+            handleClick={handleClick}
+          />
+        </div>
         {/* <ChatMainSection/> */}
         {children}
       </div>

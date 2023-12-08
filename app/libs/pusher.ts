@@ -4,8 +4,8 @@ import PusherClient from "pusher-js";
 
 const APP_ID: string | undefined = process.env.NEXT_PUBLIC_PUSHER_APP_ID;
 const KEY: string | undefined = process.env.NEXT_PUBLIC_PUSHER_KEY;
-const SECRET: string  = process.env.NEXT_PUBLIC_PUSHER_SECRET ?? "";
-const CLUSTER: string  = process.env.NEXT_PUBLIC_PUSHER_CLUSTER ?? "";
+const SECRET: string = process.env.NEXT_PUBLIC_PUSHER_SECRET ?? "";
+const CLUSTER: string = process.env.NEXT_PUBLIC_PUSHER_CLUSTER ?? "";
 
 if (!APP_ID || !KEY || !SECRET || !CLUSTER) {
   throw new Error("Missing required environment variables");

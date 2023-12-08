@@ -59,10 +59,7 @@ function ChatUsersList({
   );
 
   return (
-    <div
-      className="pt-6 px-4 grow-4 h-screen overflow-y-auto"
-      style={{ flexGrow: "4" }}
-    >
+    <>
       <h1 className="text-2xl font-bold">Chats</h1>
       <div className="w-full inline-flex items-center my-2 text-lg h-10 border border-transparent rounded-full bg-gray-100 overflow-hidden">
         <BsSearch className="text-gray-800 mx-4 text-gray-600" />
@@ -97,7 +94,7 @@ function ChatUsersList({
           )}
         </div>
       )}
-    </div>
+    </>
   );
 }
 
