@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { BsChatFill, BsPeopleFill, BsFillChatDotsFill } from "react-icons/bs";
-import { RxAvatar } from "react-icons/rx";
+import { RiLogoutBoxLine } from "react-icons/ri";
 import { signOut } from "next-auth/react";
 
 function DesktopSideBar({
@@ -54,7 +54,7 @@ function DesktopSideBar({
         className="w-12 h-12 border-0 rounded-md flex flex-col cursor-pointer justify-center mt-auto"
         onClick={() => signOut({ callbackUrl: "/" })}
       >
-        <RxAvatar size={25} style={{ color: "gray", margin: "auto" }} />
+        <RiLogoutBoxLine size={25} style={{ color: "gray", margin: "auto" }} />
       </div>
     </div>
   );

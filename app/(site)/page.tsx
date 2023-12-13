@@ -79,169 +79,165 @@ export default function Home() {
   };
 
   return (
-    <>
-      {status === "unauthenticated" && (
-        <main className="h-screen flex justify-around flex-col">
-          {formstate === "REGISTER" ? (
-            <form className="w-full max-w-sm m-auto">
-              <img className="h-20 m-auto mb-10" src="chatify.png" alt="Logo" />
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                    Username
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    name="username"
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-full-name"
-                    type="text"
-                    onChange={onChange}
-                    value={details.username}
-                  />
-                </div>
-              </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                    Email
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    name="email"
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-full-name"
-                    type="text"
-                    onChange={onChange}
-                    value={details.email}
-                  />
-                </div>
-              </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                    Password
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    name="password"
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-password"
-                    type="password"
-                    placeholder="******************"
-                    onChange={onChange}
-                    value={details.password}
-                  />
-                </div>
-              </div>
-              <div className="md:flex md:items-center">
-                <div className="md:w-1/3"></div>
-                <div className="md:w-2/3">
-                  <button
-                    className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-                    type="button"
-                    onClick={handleSubmit}
-                  >
-                    Sign Up
-                  </button>
-                </div>
-              </div>
-              <h3 className="flex mt-5 text-gray-700 justify-center">
-                <span>
-                  Already have an account?{" "}
-                  <button
-                    onClick={() => {
-                      setFormState("LOGIN");
-                    }}
-                    className="text-sky-500"
-                  >
-                    Signin
-                  </button>
-                </span>
-              </h3>
-              <div>
+    <main className="md:px-20 pl-10 pr-5 lg:px-40 h-screen md:overflow-hidden">
+      <div className="flex justify-between mt-10 w-full">
+        <img src="chatify.png" className="h-14" />
+        <ul className="md:flex hidden justify-evenly font-semibold gap-8 text-sm items-center">
+          <li className="cursor-pointer hover:border-b-4 pb-2 border-transparent hover:border-blue-500 transition">
+            Features
+          </li>
+          <li className="cursor-pointer hover:border-b-4 pb-2 border-transparent hover:border-blue-500 transition">
+            Desktop App
+          </li>
+          <li className="cursor-pointer hover:border-b-4 pb-2 border-transparent hover:border-blue-500 transition">
+            Privacy and safety
+          </li>
+        </ul>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 my-20">
+        <div className="text-left pr-[20%] z-20">
+          <h1 className="major-head md:text-7xl text-5xl font-semibold z-20">
+            Hang out anytime, Anywhere
+          </h1>
+          <p className="text-slate-600 my-6">
+            Chatify makes it easy and fun to stay close to your favourite
+            people.
+          </p>
+
+          <div>
+            <>
+              {status === "unauthenticated" && (
+                <main className="flex justify-around flex-col text-left">
+                  {formstate === "REGISTER" ? (
+                    <form className="w-full max-w-sm">
+                      <div className="md:flex mb-4">
+                        <input
+                          name="username"
+                          className="bg-gray-100 appearance-none border-2 border-gray-100 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none  focus:border-blue-500"
+                          id="inline-full-name"
+                          type="text"
+                          placeholder="Username"
+                          onChange={onChange}
+                          value={details.username}
+                        />
+                      </div>
+                      <div className="md:flex mb-4">
+                        <input
+                          name="email"
+                          placeholder="Email"
+                          className="bg-gray-100 appearance-none border-2 border-gray-100 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none  focus:border-blue-500"
+                          id="inline-full-name"
+                          type="text"
+                          onChange={onChange}
+                          value={details.email}
+                        />
+                      </div>
+                      <div className="md:flex md:items-center mb-4">
+                        <input
+                          name="password"
+                          className="bg-gray-100 appearance-none border-2 border-gray-100 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none  focus:border-blue-500"
+                          id="inline-password"
+                          type="password"
+                          placeholder="Passwprd"
+                          onChange={onChange}
+                          value={details.password}
+                        />
+                      </div>
+                      <div className="flex items-center mt-2">
+                        <button
+                          className="hover:bg-blue-400 mr-auto bg-blue-500 focus:shadow-outline focus:outline-none roun text-white font-bold py-2 px-4 rounded-full"
+                          type="button"
+                          onClick={handleSubmit}
+                        >
+                          Sign Up
+                        </button>
+                        <h3 className="flex  text-gray-700 justify-center text-sm">
+                          <span>
+                            Already have an account?{" "}
+                            <button
+                              onClick={() => {
+                                setFormState("LOGIN");
+                              }}
+                              className="text-sky-500"
+                            >
+                              Login
+                            </button>
+                          </span>
+                        </h3>
+                      </div>
+
+                      {/* <div>
+                        <h3 className="flex sign-up-with mt-5 text-gray-700">
+                          <span>or sign in with</span>
+                        </h3>
+                        <AuthForm />
+                      </div> */}
+                    </form>
+                  ) : (
+                    <form className="w-full max-w-sm">
+                      <div className="md:flex md:items-center mb-4">
+                        <input
+                          name="email"
+                          className="bg-gray-100 appearance-none border-2 border-gray-100 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none  focus:border-blue-500"
+                          id="inline-full-name"
+                          type="text"
+                          onChange={onChange}
+                          value={details.email}
+                          placeholder="Email"
+                        />
+                      </div>
+                      <div className="md:flex mb-4">
+                        <input
+                          name="password"
+                          className="bg-gray-100 appearance-none border-2 border-gray-100 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none  focus:border-blue-500"
+                          id="inline-password"
+                          type="password"
+                          placeholder="Password"
+                          onChange={onChange}
+                          value={details.password}
+                        />
+                      </div>
+                      <div className="flex gap-4 items-center">
+                        <button
+                          className="shadow bg-blue-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded-full"
+                          type="button"
+                          onClick={handleSubmit}
+                        >
+                          Log In
+                        </button>
+                        <h3 className=" text-gray-700 text-sm">
+                          <span>
+                            Don&apos;t have an account?{" "}
+                            <button
+                              onClick={() => {
+                                setFormState("REGISTER");
+                              }}
+                              className="text-sky-500 m-auto"
+                            >
+                              Signup
+                            </button>
+                          </span>
+                        </h3>
+                      </div>
+
+                      {/* <div>
                 <h3 className="flex sign-up-with mt-5 text-gray-700">
                   <span>or sign in with</span>
                 </h3>
                 <AuthForm />
-              </div>
-            </form>
-          ) : (
-            <form className="w-full max-w-sm m-auto">
-              <img className="h-20 m-auto mb-10" src="chatify.png" alt="Logo" />
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                    Email
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    name="email"
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-full-name"
-                    type="text"
-                    onChange={onChange}
-                    value={details.email}
-                  />
-                </div>
-              </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                    Password
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    name="password"
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-password"
-                    type="password"
-                    placeholder="******************"
-                    onChange={onChange}
-                    value={details.password}
-                  />
-                </div>
-              </div>
-              <div className="md:flex md:items-center">
-                <div className="md:w-1/3"></div>
-                <div className="md:w-2/3">
-                  <button
-                    className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-                    type="button"
-                    onClick={handleSubmit}
-                  >
-                    Sign In
-                  </button>
-                </div>
-              </div>
-              <h3 className="flex  mt-5 text-gray-700 justify-center">
-                <span>
-                  Don&apos;t have an account?{" "}
-                  <button
-                    onClick={() => {
-                      setFormState("REGISTER");
-                    }}
-                    className="text-sky-500"
-                  >
-                    Signup
-                  </button>
-                </span>
-              </h3>
-              <div>
-                <h3 className="flex sign-up-with mt-5 text-gray-700">
-                  <span>or sign in with</span>
-                </h3>
-                <AuthForm />
-              </div>
-            </form>
-          )}
-        </main>
-      )}
-    </>
+              </div> */}
+                    </form>
+                  )}
+                </main>
+              )}
+            </>
+          </div>
+        </div>
+        <div>
+          <img src="hangout.png" className="h-[500px]" />
+        </div>
+      </div>
+    </main>
   );
 }

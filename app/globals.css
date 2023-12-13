@@ -27,6 +27,18 @@
   display: grid;
   grid-template-columns: 1fr 3fr;
 }
+
+.major-head {
+  background: -webkit-linear-gradient(
+    83.84deg,
+    #0088ff -6.87%,
+    #a033ff 26.54%,
+    #ff5c87 58.58%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 @media screen and (max-width: 1024px) {
   .main_chat {
     grid-template-columns: 1fr;
