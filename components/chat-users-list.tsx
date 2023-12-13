@@ -62,9 +62,9 @@ function ChatUsersList({
     <>
       <h1 className="text-2xl font-bold">Chats</h1>
       <div className="w-full inline-flex items-center my-2 text-lg h-10 border border-transparent rounded-full bg-gray-100 overflow-hidden">
-        <BsSearch className="text-gray-800 mx-4 text-gray-600" />
+        <BsSearch className="mx-4 text-gray-600" />
         <input
-          placeholder="Search Chatify"
+          placeholder="Search by username"
           className="bg-inherit outline-none grow text-sm"
           type="text"
           ref={inputElem}

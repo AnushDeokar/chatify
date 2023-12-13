@@ -13,6 +13,14 @@ function ChatMainSection({ userchatId }: { userchatId: string | string[] }) {
   const [chats, setChats] = useState<Chat[]>([]);
 
   const [chatId, setChatId] = useState<string | null>(null);
+  const [user, setUser] = useState<any>(null);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const res = await axios.post("/api/users/find", { id: userchatId });
+      setUser(res.data.user);
+    };
+    fetchUserData();
+  }, [userchatId]);
 
   useEffect(() => {
     const fetchChat = async () => {
@@ -24,6 +32,7 @@ function ChatMainSection({ userchatId }: { userchatId: string | string[] }) {
         setChats(res.data.chats);
       }
     };
+
     fetchChat();
   }, [userchatId]);
 
@@ -58,8 +67,8 @@ function ChatMainSection({ userchatId }: { userchatId: string | string[] }) {
       className="w-full border flex flex-col none"
       style={{ display: "flex", flexDirection: "column" }}
     >
-      <ChatMainHeader userchatId={userchatId} />
-      <ChatMainBody chats={chats} />
+      <ChatMainHeader user={user} />
+      <ChatMainBody chats={chats} user={user} />
       <ChatMainInput handleChatAddition={handleChatAddition} />
     </div>
   );

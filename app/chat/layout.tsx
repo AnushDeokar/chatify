@@ -67,6 +67,8 @@ export default function layout({ children }: { children: React.ReactNode }) {
       </div>
     );
   }
+  const isChat = window.location.pathname === "/chat" ? true : false;
+  console.log("isChat", isChat);
   return (
     <div className="h-screen flex overflow-x-hidden">
       <DesktopSideBar
@@ -75,7 +77,9 @@ export default function layout({ children }: { children: React.ReactNode }) {
       />
       <div className="grow w-full h-screen chat main_chat">
         <div
-          className={`pt-6 px-4 grow-4 h-screen overflow-y-auto hidden lg:block`}
+          className={`pt-6 grow-4 h-screen overflow-y-auto ${
+            isChat ? "block" : "hidden"
+          } lg:block`}
           style={{ flexGrow: "4" }}
         >
           <ChatUsersList
