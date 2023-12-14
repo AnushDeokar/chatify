@@ -6,6 +6,12 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { Chat } from "@/interfaces/Chat";
 
+function getCurrentDate() {
+  const currentDate = new Date();
+  const dateString = currentDate.toISOString();
+  return dateString;
+}
+
 function ChatMainInput({
   handleChatAddition,
 }: {
@@ -16,6 +22,7 @@ function ChatMainInput({
     image: "",
     text: "",
     senderId: session?.user.id ?? "",
+    createdAt: getCurrentDate(),
   });
   return (
     <div className="w-full flex items-center px-4 gap-4 pb-2">
@@ -38,7 +45,12 @@ function ChatMainInput({
         onClick={() => {
           if (chat.text !== "" || chat.image !== "") {
             handleChatAddition(chat);
-            setChat({ image: "", text: "", senderId: session?.user.id ?? "" });
+            setChat({
+              image: "",
+              text: "",
+              senderId: session?.user.id ?? "",
+              createdAt: getCurrentDate(),
+            });
           }
         }}
       />

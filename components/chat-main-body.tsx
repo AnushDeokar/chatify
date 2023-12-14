@@ -69,7 +69,10 @@ function ChatMainBody({ chats, user }: { chats: Chat[]; user: any }) {
                   >
                     {chat.text}
                   </div>
-                  <p className="font-light text-xs m-auto w-full">
+                  <p
+                    className="font-light m-auto w-full"
+                    style={{ fontSize: "10px" }}
+                  >
                     {formattedTime}
                   </p>
                 </div>

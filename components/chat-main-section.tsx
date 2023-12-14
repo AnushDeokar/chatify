@@ -28,7 +28,6 @@ function ChatMainSection({ userchatId }: { userchatId: string | string[] }) {
       const res = await axios.post("/api/chat", { userchatId: userchatId });
       if (res.data.success) {
         setChatId(res.data.chatId);
-        console.log("chats fetched", res.data.chats);
         setChats(res.data.chats);
       }
     };
@@ -55,11 +54,11 @@ function ChatMainSection({ userchatId }: { userchatId: string | string[] }) {
   const handleChatAddition: (chat: Chat) => void = async (chat) => {
     if (chat) {
       let updatedChats = [...chats, chat];
+      setChats(updatedChats);
       const res = await axios.post("/api/message", {
         message: chat,
         chatId: chatId,
       });
-      setChats(updatedChats);
     }
   };
   return (

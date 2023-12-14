@@ -20,7 +20,6 @@ export default function layout({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState<boolean>(true);
 
   const handleClick: (arg: User) => void = (clickedUser) => {
-    console.log(clickedUser);
     if (clickedUser.id !== chatUser?.id) {
       setChatUser(clickedUser);
       router.push(`/chat/${clickedUser.id}`);
@@ -68,7 +67,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
     );
   }
   const isChat = window.location.pathname === "/chat" ? true : false;
-  console.log("isChat", isChat);
+
   return (
     <div className="h-screen flex overflow-x-hidden">
       <DesktopSideBar
