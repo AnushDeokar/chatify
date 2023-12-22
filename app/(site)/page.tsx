@@ -96,11 +96,11 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 my-20">
-        <div className="text-left pr-[20%] z-20">
-          <h1 className="major-head md:text-7xl text-5xl font-semibold z-20">
+        <div className="text-left md:pr-[0%] pr-0 z-20">
+          <h1 className="major-head md:text-7xl sm:text-5xl text-3xl font-semibold z-20">
             Hang out anytime, Anywhere
           </h1>
-          <p className="text-slate-600 my-6">
+          <p className="text-slate-600 my-6 md:text-medium text-sm xl:pr-40">
             Chatify makes it easy and fun to stay close to your favourite
             people.
           </p>
@@ -198,7 +198,7 @@ export default function Home() {
                           value={details.password}
                         />
                       </div>
-                      <div className="flex gap-4 items-center">
+                      <div className="flex sm:gap-4 sm:items-center sm:flex-row flex-col">
                         <button
                           className="shadow bg-blue-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded-full"
                           type="button"
@@ -206,7 +206,7 @@ export default function Home() {
                         >
                           Log In
                         </button>
-                        <h3 className=" text-gray-700 text-sm">
+                        <h3 className=" text-gray-700 text-sm sm:mt-0 mt-2">
                           <span>
                             Don&apos;t have an account?{" "}
                             <button
