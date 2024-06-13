@@ -49,12 +49,11 @@ function ChatMainSection({ userchatId }: { userchatId: string | string[] }) {
       }
       pusherClient.unbind("messages:new");
     };
-  }, [chatId]);
+  }, [chats, chatId]);
 
   const handleChatAddition: (chat: Chat) => void = async (chat) => {
     if (chat) {
       let updatedChats = [...chats, chat];
-      setChats(updatedChats);
       const res = await axios.post("/api/message", {
         message: chat,
         chatId: chatId,
